@@ -156,7 +156,9 @@ int insertFirst(headNode* h, int key) {
 int insertNode(headNode* h, int key) {
 
 	listNode* p = h->first; //key보다 큰 값이 들어있는 노드를 찾아 저장하는 포인터
-	listNode* pre; //key보다 큰 입력값이 들어있는 p노드의 직전 노드를 저장하는 포인터
+	listNode* pre = p
+	
+	; //key보다 큰 입력값이 들어있는 p노드의 직전 노드를 저장하는 포인터
 	listNode* node = (listNode*)malloc(sizeof(listNode)); //key 값을 저장할 새 노드
 	node->key = key;
 
@@ -170,8 +172,17 @@ int insertNode(headNode* h, int key) {
 				break; //loop 탈출
 		}
 
-		pre->link = node; //p의 직전 노드와 key 값이 들어있는 노드 연결(p의 앞에 삽입)
-		node->link = p; //key 값이 들어있는 노드와 p 노드 연결
+		if(pre == h->first)
+		{
+			h->first = node;
+			node->link = pre;
+		}
+		
+		else
+		{
+			pre->link = node; //p의 직전 노드와 key 값이 들어있는 노드 연결(p의 앞에 삽입)
+			node->link = p; //key 값이 들어있는 노드와 p 노드 연결
+		}
 	}
 
 	else //노드가 하나도 없다면
